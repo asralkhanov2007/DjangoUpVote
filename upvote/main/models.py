@@ -8,6 +8,7 @@ class Upvote(models.Model):
     slug = models.SlugField('*',unique=True, max_length=150)
     image = models.ImageField('Image...', upload_to='media/UpVoteImages/')
     body = models.TextField('Body....')
+    author = models.CharField('Author...', max_length=150)
 
     def __str__(self):
         return self.title
