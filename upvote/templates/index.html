@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>UpVote | Django</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <main>
+  <nav id="header" role="navigation" >
+    <div class="nav-wrapper container">
+      <a href="{% url 'main:upvote' %}" class="brand-logo">
+      UpVote
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="index.html"><b>Link</b></a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="sidenav">        
+        <li><a href="index.html"><b>Link</b></a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  
+    
+  <div class="container">
+    <div class="row">
+    <div class="col s12 m12 l12">
+      <h1 class="center"> <b> Upvote! </b></h1>
+    </div>
+    
+    {% for upvote in object_list  %}
+      {% with upvote as item %}
+ 
+      
+    <!-- Start Upvote -->
+    <div class="card col s12 m12 l12"> 
+    <br>    
+      <div class="col s4 m2 l2">
+        <img class="activator responsive-img" minwidth="50" width="300" src="{{item.image.url}}" alt="There was a photo " >
+      </div>     
+       <div class="card-content">
+        <span style="font-size: 30px;" class="card-title activator blue-text center"><b>{{item.title}}<i class="material-icons right">more_vert</i></b></span>       
+         <p class="center">{{item.body|truncatewords:10}}</p>
+      </div>
+      <br>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4 ">{{item.title}}<i class="material-icons right">close</i></span>
+        <p style="font-size: 20px;"><b>{{item.body}}</b></p>
+      </div>
+    </div>
+    <!-- End Upvote -->
+    {% endwith %}
+    {% endfor %}
+    <div class="row">
+    <div class="col sm12 m12 l12 center">
+        <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">next</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+  </div>
+  </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/static/js/materialize.js"></script>
+  <script src="/static/js/init.js"></script>
+  </main>
+
+  </body>
+</html>
